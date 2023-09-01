@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3620435b7b366964fa4c59b0830df445, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  LevelsDataPath: Data/Levels
-  LevelFileNameFormat: Level_{0}
+  levelsDataPath: Data/Levels
+  levelFileNameFormat: Level_{0}
+  playerDataFileName: PlayerData
+  uiPanelsResourcePath: Prefabs/UI/Panels
+  uiPanelPrefabNameFormat: Panel_{0}
+  levelMenu_LevelObjectPrefab: {fileID: -1949702457280135283, guid: 9a425379054962e459ae36d23879076d, type: 3}
+  lockedLevelIcon: {fileID: 21300000, guid: f9e4c141412ca6345963f9ece84aae0a, type: 3}
+  levelPlayIcon: {fileID: 21300000, guid: 9dbc314d5e9a24d459a014d90696eb18, type: 3}

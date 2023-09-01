@@ -43,8 +43,12 @@ namespace Assets._Game.Scripts.Runtime.Actors
                 _openPanels.Clear();
             }
 
-            _openPanels.Add(uiPanel, Instantiate(Resources.Load<GameObject>(gameSettings.uiPanelsResourcePath +
-                              string.Format(gameSettings.uiPanelPrefabNameFormat, uiPanel.ToString())), _panelsParent));
+            string panelPrefabPath = $"{gameSettings.uiPanelsResourcePath}/" +
+                                     $"{string.Format(gameSettings.uiPanelPrefabNameFormat, uiPanel.ToString())}";
+
+            Debug.Log(panelPrefabPath);
+
+            _openPanels.Add(uiPanel, Instantiate(Resources.Load<GameObject>(panelPrefabPath), _panelsParent));
         }
 
         private void ClosePanel(UIPanel uiPanel)

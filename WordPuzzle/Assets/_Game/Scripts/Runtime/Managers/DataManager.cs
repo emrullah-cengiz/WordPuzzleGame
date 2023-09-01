@@ -2,6 +2,7 @@
 using Assets._Game.Scripts.Runtime.Signals;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -21,6 +22,11 @@ namespace Assets._Game.Scripts.Runtime.Managers
             CoreSignals.Instance.onGameStarted.Subscribe(OnGameStarted, status);
         }
 
+        private void Awake()
+        {
+            PlayerData = new();
+        }
+
         #region Event Handlers
 
         private void OnGameStarted()
@@ -32,7 +38,7 @@ namespace Assets._Game.Scripts.Runtime.Managers
 
         #endregion
 
-        private HashSet<LevelSummaryData> LoadSummariezedLevelDatas()
+        private void LoadSummariezedLevelDatas()
         {
             HashSet<LevelSummaryData> levelDatas = new();
 
@@ -49,17 +55,29 @@ namespace Assets._Game.Scripts.Runtime.Managers
                 levelDatas.Add(viewData);
             }
 
-            return levelDatas;
+            LevelSummaryDatas = levelDatas;
         }
 
         private void LoadPlayerData()
         {
-            string jsonData = PlayerPrefs.GetString(GameSettings.Instance.playerDataFileName, null);
+            string playerDataPath = Path.Combine(Application.persistentDataPath, GameSettings.Instance.playerDataFileName);
+
+            if (!File.Exists(playerDataPath))
+                return;
+
+            string jsonData = File.ReadAllText(playerDataPath);
 
             if (!string.IsNullOrWhiteSpace(jsonData))
                 PlayerData = JsonUtility.FromJson<PlayerData>(jsonData);
-            else
-                PlayerData = new();
+        }
+
+        private void SavePlayerData()
+        {
+            string playerDataPath = Path.Combine(Application.persistentDataPath, GameSettings.Instance.playerDataFileName);
+
+            string playerDataJson = JsonUtility.ToJson(PlayerData);
+
+            File.WriteAllText(playerDataPath, playerDataJson);
         }
     }
 }

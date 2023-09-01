@@ -17,7 +17,8 @@ namespace Assets._Game.Scripts.Runtime.Actors
         public void Setup(LevelMenu_LevelVM viewData)
         {
             _titleText.text = viewData.title;
-            _highScoreText.text = viewData.highScore.ToString();
+            _highScoreText.text = viewData.highScore <= 0 ? 
+                                    "No Score" : $"High Score: {viewData.highScore}";
 
             GameSettings gameSettings = GameSettings.Instance;
             _playIcon.sprite = viewData.isLocked ? gameSettings.lockedLevelIcon :

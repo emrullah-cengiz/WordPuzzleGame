@@ -15,7 +15,6 @@ namespace Assets._Game.Scripts.Runtime.Managers
 
         #region Actors
 
-        [SerializeField] private LevelsPanelController _levelMenuUIController;
         [SerializeField] private UIPanelsController _uiPanelsController;
 
         #endregion
