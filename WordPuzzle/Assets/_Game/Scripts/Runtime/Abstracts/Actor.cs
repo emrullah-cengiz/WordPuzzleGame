@@ -1,10 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public abstract class Actor<T> : MonoBehaviour where T : Manager<T>
 {
-    public T Manager { get; set; }
+    [SerializeField] protected T Manager;
+
+    protected virtual void OnEnable()
+    {
+        ConfigureSubscriptions(true);
+    }
+    protected virtual void OnDisable()
+    {
+        ConfigureSubscriptions(false);
+    }
+
+    protected virtual void ConfigureSubscriptions(bool status) { }
 }

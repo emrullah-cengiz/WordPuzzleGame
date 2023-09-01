@@ -15,5 +15,5 @@ public abstract class Manager<T> : MonoBehaviour where T : Component
         ConfigureSubscriptions(false);
     }
 
-    protected abstract void ConfigureSubscriptions(bool status);
+    protected virtual void ConfigureSubscriptions(bool status) { }
 }
